@@ -16,9 +16,9 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 # OOPs in Kotlin
-* [Data Class](#-data-class)
-* [Object Declarations](#-object-declarations)
-* [Companion Object](#-companion-object)
+* [Data Class](#data-class)
+* [Object Declarations](#object-declarations)
+* [Companion Object](#companion-object)
 
 # Data Class
 Data class is a simple class which is used to hold data/state and contains standard functionality. A  **data**  keyword is used to declare a class as a data class. There may arise a situation where you need to create a class solely to hold data. These classes are known as  **data class**  or  **data access objects**  or  **data transfer objects** , etc.
