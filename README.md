@@ -1,20 +1,3 @@
-# flexxed_by_dixit
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
 # OOPs in Kotlin
 * [Data Class](#data-class)
 * [Object Declarations](#object-declarations)
@@ -78,6 +61,7 @@ data class User(var name: String, var id: Int)
 >
 > User(name=Sam, id=25)
 
+---
 # Object Declarations
 
 Singleton Class in Kotlin is also called as the Singleton Object in Kotlin. Singleton class is a class that is defined in such a way that only one instance of the class can be created and used everywhere.
@@ -136,6 +120,7 @@ object Test
 >
 > The answer of addition is 25
 
+---
 # Companion Object
 
 There might be a situation where we want to have  **some properties common for all objects**  of the class. These types of properties and methods are known as  **class level fields**. In Kotlin, a  **companion object**  is used to declare the class level fields.
