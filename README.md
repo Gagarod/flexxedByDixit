@@ -1,6 +1,3 @@
-:::info
-:pushpin: Want to learn more? ➜ [HackMD Tutorials](https://hackmd.io/c/tutorials) 
-:::
 # OOPs in Kotlin
 * [Data Class](#data-class)
 * [Object Declarations](#object-declarations)
