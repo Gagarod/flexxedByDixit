@@ -73,7 +73,9 @@ data class User(var name: String, var id: Int)
 #### Output:
 
 > User(name=Sam, id=10)
+>
 > Equal
+>
 > User(name=Sam, id=25)
 
 # Object Declarations
@@ -127,9 +129,12 @@ object Test
 ```
 #### Output:
 > Singleton class invoked.
+>
 > This is a test
- The answer of addition is 5
- The answer of addition is 25
+>
+> The answer of addition is 5
+>
+> The answer of addition is 25
 
 # Companion Object
 
@@ -162,8 +167,9 @@ fun main() {
     Employee.Test.printI()  // Access printI() method using class name and companion object name
 }
 ```
-
+#### Output : 
 > Value of i: 1
+>
 > Value of i: 2
 
 Few important points regarding companion objects:
