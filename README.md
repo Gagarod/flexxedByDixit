@@ -1,10 +1,10 @@
 # OOPs in Kotlin
-* [Defining Class and creating Objects](#defining-class-and-creating-objects)
+* [Defining Class and Creating Objects](#defining-class-and-creating-objects)
 * [Data Class](#data-class)
 * [Object Declarations](#object-declarations)
 * [Companion Object](#companion-object)
 ---
-# Defining Class and creating Objects
+# Defining Class And Creating Objects
 
 ### Kotlin Class
 
