@@ -1,7 +1,52 @@
 # OOPs in Kotlin
+* [Defining Class and creating Objects](#defining-class-and-creating-objects)
 * [Data Class](#data-class)
 * [Object Declarations](#object-declarations)
 * [Companion Object](#companion-object)
+---
+# Defining Class and creating Objects
+
+### Kotlin Class
+
+Class is a blueprint for the objects which have common properties. Kotlin classes are declared using keyword class. Kotlin class has a class header which specifies its type parameters, constructor etc. and the class body which is surrounded by curly braces.
+
+#### Syntax of Kotlin class declaration
+```kotlin=
+class className{ // class header
+
+  // property
+
+  // member function
+}
+```
+
+Properties and member function of class are accessed by **.** operator using object
+#### Example
+Create a **Car** class along with some properties (brand, model and year)
+```kotlin
+class Car { var brand = "" var model = "" var year = 0 }
+```
+
+### Create an Object
+Now we can use the class named **Car** to create objects.
+
+In the example below, we create an object of Car called c1 , and then we access the properties of c1 by using the dot syntax (.), just like we did to access array and string properties:
+
+#### Example
+```kotlin
+// Create a c1 object of the Car class
+val c1 = Car()
+
+// Access the properties and add some values to it
+c1.brand = "Ford"
+c1.model = "Mustang"
+c1.year = 1969
+
+println(c1.brand)   // Outputs Ford
+println(c1.model)   // Outputs Mustang
+println(c1.year)    // Outputs 1969
+```
+---
 
 # Data Class
 Data class is a simple class which is used to hold data/state and contains standard functionality. A  **data**  keyword is used to declare a class as a data class. There may arise a situation where you need to create a class solely to hold data. These classes are known as  **data class**  or  **data access objects**  or  **data transfer objects** , etc.
