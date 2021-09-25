@@ -11,7 +11,7 @@
 Class is a blueprint for the objects which have common properties. Kotlin classes are declared using keyword class. Kotlin class has a class header which specifies its type parameters, constructor etc. and the class body which is surrounded by curly braces.
 
 #### Syntax of Kotlin class declaration
-```kotlin=
+```kotlin
 class className{ // class header
 
   // property
