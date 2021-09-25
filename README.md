@@ -24,7 +24,11 @@ Properties and member function of class are accessed by **.** operator using obj
 #### Example
 Create a **Car** class along with some properties (brand, model and year)
 ```kotlin
-class Car { var brand = "" var model = "" var year = 0 }
+class Car {
+  var brand = ""
+  var model = ""
+  var year = 0
+}
 ```
 
 ### Create an Object
