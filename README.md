@@ -1,4 +1,4 @@
-# OOPs in Kotlin
+# OOPS Concepts in Kotlin
 * [What is OOP?](#what-is-oop)
 * [Defining Class and Creating Objects](#defining-class-and-creating-objects)
 * [Constructor](#constructor)
