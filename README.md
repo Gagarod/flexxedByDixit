@@ -1,21 +1,25 @@
 # OOPs in Kotlin
 * [Defining Class and Creating Objects](#defining-class-and-creating-objects)
+* [Constructor](#constructor)
+* [Inheritance](#inheritance)
+* [Function Overriding](#function-overriding)
+* [Visibility Modifiers](#visibility-modifiers)
+* [Abstract Class](#abstract-class)
+* [Interface](#interface)
 * [Data Class](#data-class)
 * [Object Declarations](#object-declarations)
 * [Companion Object](#companion-object)
 ---
-# Defining Class And Creating Objects
+# Defining Class and Creating Objects
 
 ### Kotlin Class
 
 Class is a blueprint for the objects which have common properties. Kotlin classes are declared using keyword class. Kotlin class has a class header which specifies its type parameters, constructor etc. and the class body which is surrounded by curly braces.
 
 #### Syntax of Kotlin class declaration
-```kotlin
+```kotlin=
 class className{ // class header
-
   // property
-
   // member function
 }
 ```
@@ -28,6 +32,16 @@ class Car {
   var brand = ""
   var model = ""
   var year = 0
+  private var isOn: Boolean = false
+  // member function
+  fun turnOn() {
+      isOn = true
+  }  
+
+  // member function
+  fun turnOff() {
+      isOn = false
+  }
 }
 ```
 
@@ -49,6 +63,603 @@ c1.year = 1969
 println(c1.brand)   // Outputs Ford
 println(c1.model)   // Outputs Mustang
 println(c1.year)    // Outputs 1969
+```
+---
+# Constructor
+
+A constructor is a special member function that is invoked when an object of the class is created primarily to initialize variables or properties. A class needs to have a constructor and if we do not declare a constructor, then the compiler generates a default constructor.
+ Kotlin has  **two**  types of constructors –
+
+
+1. **Primary Constructor**
+2. **Secondary Constructor**
+
+
+A class in Kotlin can have at most one primary constructor, and one or more secondary constructors. The primary constructor initializes the class, while the secondary constructor is used to initialize the class and introduce some extra logic.
+
+
+### **Primary Constructor –**
+
+The primary constructor is initialized in the class header, goes after the class name, using the  **constructor**  keyword. The parameters are optional in the primary constructor.
+
+
+```kotlin
+class Add constructor(val a: Int, val b: Int) {
+     // code
+}
+```
+The constructor keyword can be omitted if there is no annotations or access modifiers specified. 
+
+```kotlin
+class Add(val a: Int, val b: Int) {
+     // code
+}
+```
+
+**Kotlin program of primary constructor –**
+
+
+```kotlin
+fun main(args: Array<String>)
+{
+    val add = Add(5, 6)
+    println("The Sum of numbers 5 and 6 is: ${add.c}")
+}
+//primary constructor
+class Add constructor(a: Int,b:Int)
+{
+    var c = a+b;
+}
+```
+**Output:**
+
+> The Sum of two numbers is: 11
+
+**Explanation:**
+ When we create the object add for the class then the values 5 and 6 passes to the constructor. The constructor parameters a and b initialize with the parameters 5 and 6 respectively.
+ The local variable c contains the sum of variables. In the main, we access the property of constructor using  **${add.c}**.
+
+
+**Primary Constructor with Initializer Block –**
+
+The primary constructor cannot contain any code, the initialization code can be placed in a separate initializer block prefixed with the  **init**  keyword.
+**Kotlin program of primary constructor with initializer block –**
+
+```kotlin
+fun main(args: Array<String>) {
+    val emp = employee(1406, "Saksham")
+}
+class employee(emp_id : Int , emp_name: String) {
+    val id: Int
+    var name: String
+ 
+    // initializer block
+    init {
+        id = emp_id
+        name = emp_name
+ 
+        println("Employee id is: $id")
+        println("Employee name: $name")
+    }
+}
+
+```
+
+**Output:**
+
+```
+Employee id is: 1406
+Employee name: Saksham
+```
+
+**Explanation:**
+ When the object  **emp**  is created for the class employee, the values 1406 and "Saksham" passed to the parameters  **emp_id**  and  **emp_name**  of the constructor. Two properties are declared in the class id and name.
+ Initializer block is executed at the time of object creation,and not only initialize the properties but also prints to the standard output.
+
+
+**Default value in primary constructor –**
+
+Similar to functions default values in functions, we can initialize the constructor parameters with some default values.
+
+**Kotlin program of default values in primary constructor-**
+
+
+```kotlin
+fun main(args: Array<String>) {
+    val emp = employee(1406, "Saksham")
+    val emp2 = employee(1408)// default value for emp_name will be used here
+    val emp3 = employee()// default values for both parameters because no arguments passed
+ 
+}
+class employee(emp_id : Int = 100 , emp_name: String = "abc") {
+    val id: Int
+    var name: String
+ 
+    // initializer block
+    init {
+        id = emp_id
+        name = emp_name
+ 
+        print("Employee id is: $id, ")
+        println("Employee name: $name")
+        println()
+    }
+}
+
+```
+**Output:**
+
+
+```
+Employee id is: 1406, Employee name: Saksham
+Employee id is: 1408, Employee name: abc
+Employee id is: 100, Employee name: abc
+```
+
+**Explanation:**
+ Here, we have initialized the constructor parameters with some default values emp_id = 100 and emp_name = "abc";.
+ When the object  **emp**  is created we passed the values for both the parameters so it prints those values.
+ But, at the time of object  **emp2**  creation, we have not passed the emp\_name so initializer block uses the default values and print to the standard output.
+
+
+### **Secondary Constructor –**
+
+As mentioned above, Kotlin may have one or more secondary constructors. Secondary constructors allow initialization of variables and allow to provide some logic to the class as well. They are prefixed with the  **constructor**  keyword.
+
+**Kotlin program of implementing secondary constructor-**
+
+```kotlin
+fun main(args: Array<String>)
+{
+    Add(5, 6)
+}
+//class with one secondary constructor
+class Add
+{
+    constructor(a: Int, b:Int)
+    {
+        var c = a + b
+        println("The sum of numbers 5 and 6 is: ${c}")
+    }
+}
+
+```
+**Output:**
+
+> The sum of numbers 5 and 6 is: 11
+
+**Calling one secondary constructor from another –**
+
+A secondary constructor may call another secondary constructor of the same class using **this()** function. In the below program, we have called the another constructor using **this(a,b,7)** because invoking of that constructor require three parameters.
+
+**Kotlin program of calling one constructor from another-**
+
+
+```kotlin
+fun main(args: Array<String>)
+{
+    Add(5,6)
+}
+class Add {
+    // calling another secondary using this
+    constructor(a: Int,b:Int) : this(a,b,7) {
+        var sumOfTwo = a + b
+        println("The sum of two numbers 5 and 6 is: $sumOfTwo")
+    }
+    // this executes first
+    constructor(a: Int, b: Int,c: Int) {
+        var sumOfThree = a + b + c
+        println("The sum of three numbers 5,6 and 7 is: $sumOfThree")
+    }
+}
+
+```
+
+**Output:**
+
+
+```
+The sum of three numbers 5,6 and 7 is: 18
+The sum of two numbers 5 and 6 is: 11
+```
+
+**Calling parent class secondary constructor from child class secondary constructor –**
+
+We can call the secondary constructor of parent class from the child class using the  **super**  keyword. In the below program, we have shown the process of calling.
+
+```kotlin
+fun main(args: Array<String>) {
+    Child(1406, "Ashrut",55555.00)
+}
+open class Parent {
+    var id: Int 
+    var name: String 
+    constructor (emp_id: Int, emp_name: String) {
+        id = emp_id
+        name = emp_name
+    }
+}
+class Child : Parent {
+    var salary : Double
+    constructor (emp_id : Int, emp_name: String,emp_salary: Double):super(emp_id,emp_name){
+        salary= emp_salary
+        println("Employee id is: $id")
+        println("Employee name: $name")
+        println("Employee salary: $salary")
+    }
+}
+```
+---
+
+# Inheritance
+
+Inheritance is an important feature of object oriented programming language. Inheritance allows to inherit the feature of existing class (or base or parent class) to new class (or derived class or child class). The subclass contains features of superclass as well as its own.
+
+The concept of inheritance is allowed when two or more classes have same properties. It allows code reusability. A derived class has only one base class but may have multiple interfaces whereas a base class may have one or more derived classes.
+
+
+
+All classes in Kotlin are  **by default**  final. It means these  **classes are not inheritable**. To make a class inheritable, we add open keyword in the class header.
+
+A child class inherits a parent class using : operator. The  **syntax to inherit a class**  is:
+
+```kotlin
+open class Parent{
+    // Parent class features
+}
+class Child : Parent(){
+    // Child class features
+}
+```
+
+**Primary constructor in Inheritance**
+
+If the parent class has a primary constructor then the  **child class must call the primary constructor of parent class**.
+
+
+Vehicle class has properties:
+
+- is the vehicle for carrying passengers
+- no. of tyres
+- fuel capacity of vehicle
+
+
+```kotlin
+open class Vehicle(carryPassenger: Boolean, tyres: Int, fuelCapacity: Int){
+    init {
+        println("Does Vehicle carry passenger: $carryPassenger")
+        println("Tyres in Vehicle: $tyres")
+        println("Fuel capacity of Vehicle: $fuelCapacity")
+    }
+}
+
+// child class with extra airBags property
+class Car(carryPassenger: Boolean, tyres: Int, fuelCapacity: Int, airBags: Int) : Vehicle(carryPassenger, tyres, fuelCapacity){
+    // init function for child class
+    init {
+        println("No. of air bags in car: $airBags")
+    }
+}
+
+fun main() {
+    val car = Car(true, 4, 50, 4)
+}
+
+```
+
+```
+Does Vehicle carry passenger: true
+Tyres in Vehicle: 4
+Fuel capacity of Vehicle: 50
+No. of air bags in car: 4
+```
+
+
+While creating the object of Car class, the primary constructor(default) of the child class which is Car is called which internally calls  **the primary constructor of parent class**  Vehicle first and then  **its init block**. After that, the primary default constructor of the child class Car completes and then the init  **block of child class**  Car is executed.
+
+**Secondary constructor in Inheritance**
+
+If the base class does not have a primary constructor but has a secondary constructor then the derived class should call the secondry constructor of the base class using the super keyword.
+
+```kotlin
+open class Vehicle{
+    // secondary constructor
+    constructor(carryPassenger: Boolean, tyres: Int, fuelCapacity: Int){
+        println("Does Vehicle carry passenger: $carryPassenger")
+        println("Tyres in Vehicle: $tyres")
+        println("Fuel capacity of Vehicle: $fuelCapacity")
+    }
+}
+// child class
+class Truck: Vehicle{
+    // secondary constructor calling super for parent class
+    constructor(carryPassenger: Boolean, tyres: Int, fuelCapacity: Int, loadCarryCapacity: Int): super(carryPassenger, tyres, fuelCapacity){
+        println("Load carrying capacity is: $loadCarryCapacity")
+    }
+}
+
+fun main() {
+    val truck = Truck(false, 10, 200, 1000)
+}
+```
+
+```
+Does Vehicle carry passenger: false
+Tyres in Vehicle: 10
+Fuel capacity of Vehicle: 200
+Load carrying capacity is: 1000
+```
+
+
+
+---
+
+# Function Overriding
+
+In inheritance, we can provide specific implementation of the base class functions inside the derived class. It means if a function exists in parent class then we can  **provide a different implementation**  of the  **same function in child class**. It is known as  **Function Overriding**.
+
+In Kotlin, the functions are also final  **by default**. To override a function, it must be marked as open(just like the class) in the parent class and in the child class we must use the keyword override instead of open to specify that we have overridden the function.
+
+The  **function name and parameters should be same**.
+
+And, the  **return type of child class functions**  can be a  **sub type**  of the parent class functions.
+
+Let us see an example in which we will override two methods of the base class:
+```kotlin
+// parent class
+open class Vehicle{
+
+    open fun run(){
+        println("Vehicle is running")
+    }
+
+    open fun drivenBy(name: String){
+        println("Vehicle is driven by: $name")
+    }
+}
+// child class
+class Jeep: Vehicle(){
+
+    override fun run() {
+        println("Driving a Jeep")
+    }
+
+    override fun drivenBy(name: String) {
+        println("Jeep is driven by $name")
+    }
+}
+
+fun main() {
+    val jeep = Jeep()
+    jeep.run()
+    jeep.drivenBy("Ninja")
+}
+```
+
+```
+Driving a Jeep
+
+Jeep is driven by Ninja
+```
+
+
+We can also call parent class functions inside child class using super keyword.
+
+**Kotlin Overriding Properties**
+
+Similarly, we can also override properties and  **change their value inside child class**. The properties should be marked open in order to override them and use the override keyword in the child class when we override the property just like we did for class functions.
+
+```kotlin
+package inheritance
+
+// parent class
+open class Vehicle{
+    open val color: String = "Black"
+    open fun printColor(){
+        println("The color of vehicle is: $color")
+    }
+}
+// child class
+class Jeep: Vehicle(){
+    override val color: String = "Red"
+    override fun printColor(){
+        println("The color of Jeep is: $color")
+    }
+}
+
+fun main() {
+    val jeep = Jeep()
+    jeep.printColor()
+}
+```
+---
+
+# Visibility Modifiers
+
+Visibility modifiers are keywords that set the visibility (accessibility) of classes, objects, interface, constructors, functions, properties and their setters. (You cannot set visibility modifier of getters as they always take the same visibility as that of the property.)
+
+## Visibility Modifiers Inside Package
+
+A package organizes a set of related functions, properties and classes, objects, and interfaces.
+
+| **Modifier** | **Description** |
+| --- | --- |
+| **public** | declarations are visible everywhere |
+| **private** | visible inside the file containing the declaration |
+| **internal** | visible inside the same module (a set of Kotlin files compiled together) |
+| **protected** | not available for packages (used for subclasses) |
+
+Let's take an example:
+
+```kotlin
+// file name: hello.kt
+
+package temp
+
+fun funct1() {} // public by default and visible everywhere
+
+private fun func2() {} // visible inside hello.kt
+
+internal fun func3() {} // visible inside the same module
+
+var mssg = "Yo"; // visible everywhere
+
+get() = field // visible inside hello.kt (same as its property)
+
+private set(value) { // visible inside hello.kt
+    field = value
+}
+
+private class class1 {} // visible inside hello.kt
+```
+
+**Visibility Modifiers Inside Classes and Interfaces**
+
+Here&#39;s how visibility modifiers works for members (functions, properties) declared inside a class:
+
+| Modifier | Description |
+| --- | --- |
+| public | visible to any client who can see the declaring class |
+| private | visible inside the class only |
+| protected | visible inside the class and its subclasses |
+| internal | visible to any client inside the module that can see the declaring class |
+
+**Note:**  If you override a protected member in the derived class without specifying its visibility, its visibility will also be protected.
+
+```kotlin
+open class Base() {
+    private var a = 1 // public by default
+    var b = 2 // private to Base class
+    protected open val c = 3 // visible to the Base and the Derived class
+    internal val d = 4 // visible inside the same module
+    protected fun e() { } // visible to the Base and the Derived class
+}
+
+class Derived: Base() {
+    // b, c, d, and e() of the Base class are visible
+    // a is not visible
+    override val c = 7 // c is protected
+}
+
+fun main(args: Array<String>) {
+    val base = Base() // base.b and base.d are visible
+    // base.a, base.c and base.e() are not visible
+    val derived = Derived()
+    // derived.c is not visible
+}
+```
+---
+# Abstract Class
+
+In Kotlin, abstract class is declared using the  **abstract**  keyword in front of class. An abstract class can not instantiated means we can not create object for the abstract class.
+
+**Abstract class declaration:**
+
+```kotlin
+abstract class className {
+    .........
+}
+```
+
+**Points to remember:**
+
+1. We can't create an object for abstract class.
+2. All the variables (properties) and member functions of an abstract class are by default _non-abstract_. So, if we want to override these members in the child class then we need to use  **open**  keyword.
+3. If we declare a member function as abstract then we does not need to annotate with  **open**  keyword because these are open by default.
+4. An abstract member function doesn't have a body, and it must be implemented in the derived class.
+
+An abstract class can contain both abstract and non-abstract members as shown below:
+
+```kotlin
+abstract class className(val x: String) {   // Non-Abstract Property       
+    abstract var y: Int      // Abstract Property
+
+    abstract fun method1()   // Abstract Methods
+
+    fun method2() {          // Non-Abstract Method
+        println("Non abstract function")
+    }
+}
+```
+
+Examples:
+```kotlin
+abstract class Employee(name: String) {
+
+    init {
+        println("My name is $name.")
+    }
+
+    fun displaySalary(salary: Int) {
+        println("Salary is $salary.")
+    }
+
+    abstract fun displayJob(description: String)
+}
+
+class Manager(name: String): Employee(name) {
+    override fun displayJob(description: String) {
+        println(description)
+    }
+}
+
+fun main(args: Array<String>) {
+    //val emp=Employee("James Cooper")  cannot create object of abstract class
+    val manager = Manager("James Cooper")
+    manager.displayJob("I'm a manager.")
+    manager.displaySalary(23123)
+}
+
+```
+---
+# Interface
+
+An interface is a blueprint of class.Kotlin interface is similar to Java 8. It contains abstract method declarations as well as implementation of method.Interface may have property but it needs to be abstract or has to provide accessor implementations.
+
+**How to define an interface?**
+
+Keyword interface is used to define interfaces in Kotlin. For example,
+
+```kotlin
+interface MyInterface {
+    var myVar: String   // abstract property
+    fun absMethod()          // abstract method
+    fun hello() = "Hello there" // method with default implementation
+}
+```
+#### Example:  
+
+```kotlin
+
+interface MyInterface  {
+   var myVar: Int            // abstract property
+   fun absMethod():String    // abstract method 
+   fun hello() {
+      println("Hello there")
+   }
+}
+class InterfaceImp : MyInterface {
+   override var myVar: Int = 25
+   override fun absMethod() = "Keep Learning"
+}
+fun main(args: Array<String>) {
+   val obj = InterfaceImp()
+   println("My Variable Value is = ${obj.myVar}")
+   print("Calling hello(): ")
+   obj.hello()
+   
+   print("Message from the Website-- ")
+   println(obj.absMethod())
+}
+
+```
+
+The above piece of code will yield the following output:
+
+```
+My Variable Value is = 25
+Calling hello(): Hello there
+Message from the Website-- Keep Learning
 ```
 ---
 
