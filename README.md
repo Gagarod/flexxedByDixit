@@ -1,4 +1,5 @@
 # OOPs in Kotlin
+* [What is OOP?](#what-is-OOP?)
 * [Defining Class and Creating Objects](#defining-class-and-creating-objects)
 * [Constructor](#constructor)
 * [Inheritance](#inheritance)
@@ -9,6 +10,18 @@
 * [Data Class](#data-class)
 * [Object Declarations](#object-declarations)
 * [Companion Object](#companion-object)
+---
+# What is OOP?
+OOP stands for Object-Oriented Programming.
+
+Procedural programming is about writing procedures or methods that perform operations on the data, while in object-oriented style of programming, you can divide a complex problem into smaller sets by creating objects that contain both data and methods.
+
+Features of Object-oriented programming are:
+
+* OOP is faster and easier to execute
+* OOP provides a clear structure for the programs
+* OOP helps to keep the Kotlin code DRY "Don't Repeat Yourself", and makes the code easier to maintain, modify and debug
+
 ---
 # Defining Class and Creating Objects
 
@@ -33,17 +46,21 @@ class Car {
   var model = ""
   var year = 0
   private var isOn: Boolean = false
-  // member function
-  fun turnOn() {
+  fun turnOn() {    // member function
       isOn = true
-  }  
-
-  // member function
-  fun turnOff() {
+  } 
+  fun turnOff() {    // member function
       isOn = false
   }
 }
 ```
+### Kotlin Object
+Object is real time entity or may be a logical entity which has state and behavior. It has the characteristics:
+
+* **state**: it represents value of an object.
+* **behavior**: it represent the functionality of an object.
+
+Object is used to access the properties and member function of a class. Kotlin allows to create multiple object of a class.
 
 ### Create an Object
 Now we can use the class named **Car** to create objects.
