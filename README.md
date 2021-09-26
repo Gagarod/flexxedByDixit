@@ -1,5 +1,5 @@
 # OOPs in Kotlin
-* [What is OOP?](#what-is-OOP?)
+* [What is OOP?](#what-is-oOP?)
 * [Defining Class and Creating Objects](#defining-class-and-creating-objects)
 * [Constructor](#constructor)
 * [Inheritance](#inheritance)
